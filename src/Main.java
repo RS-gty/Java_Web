@@ -1,3 +1,5 @@
+import environment.Environment;
+import linalg.Vector3d;
 import server.Host;
 import server.Server;
 import server.SubServer;
@@ -9,20 +11,14 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
 
-        SubServer S1 = new SubServer();
-        SubServer S2 = new SubServer();
-        Host H1 = new Host();
-        Host H2 = new Host();
+        SubServer S1 = new SubServer(1,2,2);
+        SubServer S2 = new SubServer(1,1,1);
+        Host H1 = new Host(1,2,3);
+        Host H2 = new Host(1,1,1);
+        Environment E1 = new Environment(new Vector3d(1, 2, 3), 1);
 
-
-        S1.register(H1);
-        S2.register(H1);
-        S2.register(H2);
-        S1.register(H2);
-
-        System.out.printf(Arrays.toString(H1.server_ids));
-        System.out.printf(Arrays.toString(S1.ids));
-        System.out.printf(Arrays.toString(S2.ids));
-        System.out.printf(Arrays.toString(H2.server_ids));
+        H1.registerEnv(E1);
+        S1.registerHost(H1);
+        System.out.println(Arrays.toString(S1.ids));
     }
 }
