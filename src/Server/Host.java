@@ -15,10 +15,11 @@ public class Host extends Server {
 
     public Host(Vector3d position){
         super(position);
-        this.host_id = UUID.randomUUID().toString().substring(14, 18);
+        this.host_id = UUID.randomUUID().toString().substring(13, 18);
     }
     public Host(double x, double y, double z){
         super(x, y, z);
+        this.host_id = UUID.randomUUID().toString().substring(13, 18);
     }
 
     public String getID(SubServer subserver){
@@ -40,6 +41,7 @@ public class Host extends Server {
         environment.register(this);
         String eid = environment.getId(this);
         if (eid != null){
+            this.tps = environment.getTps();
             this.eid = eid;
         } else {
             throw new IllegalArgumentException("register environment failed");
@@ -50,6 +52,10 @@ public class Host extends Server {
         if (environment.isAccessable(subserver.position)){
             addServer(subserver);
         }
+    }
+
+    public double getTps(){
+        return tps;
     }
 
     private void addServer(Server server){

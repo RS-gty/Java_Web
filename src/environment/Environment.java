@@ -8,18 +8,21 @@ import java.util.Arrays;
 import java.util.UUID;
 
 public class Environment {
+    private double tps;
     private Vector3d center;
     private double radius;
     private String id;
     private Host[] hosts = new Host[0];
 
-    public Environment(Vector3d center, double radius) {
+    public Environment(double tps, Vector3d center, double radius) {
+        this.tps = tps;
         this.center = center;
         this.radius = radius;
         this.id = UUID.randomUUID().toString().substring(0, 8);
     }
 
-    public Environment(Vector3d center) {
+    public Environment(double tps, Vector3d center) {
+        this.tps = tps;
         this.center = center;
         this.radius = 0;
         this.id = UUID.randomUUID().toString().substring(0, 8);
@@ -44,5 +47,9 @@ public class Environment {
         } else {
             return null;
         }
+    }
+
+    public double getTps() {
+        return tps;
     }
 }
